@@ -1,0 +1,26 @@
+<configuration>
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="LOGSTASH"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/var/log/sled/sled.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/var/log/sled/sled-%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+	</appender>	
+        
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+	</root>
+	
+	<logger name="sk.upjs.ics.novotnyr.sled" level="DEBUG">
+		<appender-ref ref="LOGSTASH" />
+	</logger>
+	
+</configuration>
